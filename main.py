@@ -2,9 +2,24 @@
 
 
 import os
+import tkinter
 from tkinter import *
-
+#2nd window
+def open_new_window1():
+    new_window=tkinter.Toplevel(root)
+    new_window.geometry("1280x720")
 root=Tk()
+def switch_window1():
+    root.destroy()
+#mergin commands into 1 function cuz i cant have 2 commands on a button for some reason
+
+
+
+
+
+
+
+
 #size of window
 root.geometry("1141x639")
 #background
@@ -14,8 +29,8 @@ canvas1 = Canvas(root, width=1141, height=639)
 canvas1.pack(fill="both",expand=True)
 
 canvas1.create_image(0,0, image=bg, anchor="nw")
-
-button1 = Button(root, text="start", borderwidth=0,highlightthickness=0)
+#Creating buttons
+button1 = Button(root, text="start", command=open_new_window1,)
 button2 = Button(root,text="Name")
 
 button1_canvas = canvas1.create_window(
@@ -30,8 +45,18 @@ button2_canvas = canvas1.create_window(
     anchor="nw",
     window=button2,
 )
-button1.place(x=700, y=10)
+button1.place(x=599, y=453)
+button2.place(x=265, y=453)
+
+
+button1.config(width=39, height=5)
+button2.config(width=39, height=5)
+
+
+
 root.title("Gym quiz")
+
+
 
 
 
