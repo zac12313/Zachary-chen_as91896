@@ -12,7 +12,9 @@ root=Tk()
 def switch_window1():
     root.destroy()
 #mergin commands into 1 function cuz i cant have 2 commands on a button for some reason
-
+def merge():
+    open_new_window1()
+    switch_window1()
 
 
 
@@ -30,7 +32,7 @@ canvas1.pack(fill="both",expand=True)
 
 canvas1.create_image(0,0, image=bg, anchor="nw")
 #Creating buttons
-button1 = Button(root, text="start", command=open_new_window1,)
+button1 = Button(root, text="start", command=merge,)
 button2 = Button(root,text="Name")
 
 button1_canvas = canvas1.create_window(
