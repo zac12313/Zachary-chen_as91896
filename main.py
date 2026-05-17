@@ -5,16 +5,17 @@ import os
 import tkinter
 from tkinter import *
 #2nd window
+root=Tk()
 def open_new_window1():
     new_window=tkinter.Toplevel(root)
     new_window.geometry("1280x720")
-root=Tk()
+    new_window.img_ref = PhotoImage(file="Photo/Q1.png")
+    bg_label = Label(new_window, image=new_window.img_ref)
+    bg_label.pack(fill="both", expand=True)
+
 def switch_window1():
     root.destroy()
-#mergin commands into 1 function cuz i cant have 2 commands on a button for some reason
-def merge():
-    open_new_window1()
-    switch_window1()
+
 
 
 
@@ -32,7 +33,7 @@ canvas1.pack(fill="both",expand=True)
 
 canvas1.create_image(0,0, image=bg, anchor="nw")
 #Creating buttons
-button1 = Button(root, text="start", command=merge,)
+button1 = Button(root, text="start", command=open_new_window1,)
 button2 = Button(root,text="Name")
 
 button1_canvas = canvas1.create_window(
