@@ -15,10 +15,10 @@ def open_new_window1():
     new_window.geometry("1280x720")
 
 def homepage():
-    # size of window
+    # size of window+
     root.geometry("1141x639")
     # background
-    bg = PhotoImage(file="photo/Homepage.png")
+    bg = PhotoImage(file="../Photo/Homepage.png")
 
     canvas1 = Canvas(root, width=1141, height=639)
     canvas1.pack(fill="both", expand=True)

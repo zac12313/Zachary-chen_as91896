@@ -5,7 +5,7 @@ root= tk.Tk()
 #size of window
 root.geometry("1280x720")
 #background
-bg = PhotoImage(file="Photo/Homepage.png")
+bg = PhotoImage(file="../Photo/Homepage.png")
 
 canvas1=Canvas(root, width=1280, height=720)
 canvas1.pack(fill="both",expand=True)
