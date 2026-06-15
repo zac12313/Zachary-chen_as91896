@@ -8,7 +8,37 @@ from PIL import Image, ImageTk
 import random
 
 
+questions_andanswers ={
+    1: ("What piece of equipment can be used  to train the pectoral muscles?",'Treadmill','Bench press','Rowing Machine','Kettlebell', 3),
+2: ("What are the chest Muscles called",'Abdominals','Biceps','Pectorals','Deltoids', 3),
+3: ("What is the largest muscle group in the body",'Pectorals','Biceps','Gluteus Maximus','Abdominals', 3),
+4: ("How many calories are in 1 gram of Carbohydrates",'1','3','7','4', 4),
+5: ("How much protein do you need per kg of budy weight for muscle gain ",'1-1.5','0.3x-1','1.6-2.2','3-5', 1),
+1: ("",'','','','', 1),
+1: ("",'','','','', 1),
+1: ("",'','','','', 1),
+1: ("",'','','','', 1),
+1: ("",'','','','', 1),
+1: ("",'','','','', 1),
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 class Quizstart:
     def __innit__(self, parent):
