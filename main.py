@@ -57,7 +57,7 @@ class Quiz:
 
         randomiser()
 
-        self.question_label = label(self.quiz_frame, text=questions_and_answers[qnum][0], font=("Tw Cen MT", "18", "bold"), bg=background_color)
+        self.question_label = Label(self.quiz_frame, text=questions_and_answers[qnum][0], font=("Tw Cen MT", "18", "bold"), bg=background_color)
         self.question_label.grid(row=0, padx=10, pady=10)
 
         self.var1 = IntVar()
@@ -65,8 +65,48 @@ class Quiz:
         self.rb1 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][1], font=("Helvetica","12"), bg=background_color, value=1, variable=self.var1)
         self.rb1.grid(row=1, sticky=W)
 
+        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1)
+        self.rb2.grid(row=2, sticky=W)
+
+        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][3], font=("Helvetica", "12"),  bg=background_color, value=1, variable=self.var1)
+        self.rb2.grid(row=3, sticky=W)
+
+        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1)
+        self.rb2.grid(row=4, sticky=W)
 
 
+        self.confirm_button = Button(self.quiz_frame, text="confirm", bg="pink", command=self.test_progress)
+        self.confirm_button.grid(row=8,pady=1)
+
+        def questions_setup(self):
+            randomiser()
+            self.var1.set(0)
+            self.question_label.config(text=questions_and_answers[qnum][0])
+            self.rb1.config(text=questions_and_answers[qnum][1])
+            self.rb1.config(text=questions_and_answers[qnum][2])
+            self.rb1.config(text=questions_and_answers[qnum][3])
+            self.rb1.config(text=questions_and_answers[qnum][4])
+
+        def test_progress(self):
+            global score
+            choice = self.var1.get()
+            if choice == 0:
+                self.confirm_button.config(text="Please select answer")
+                return
+
+            #check answer
+            if choice == questions_and_answers[qnum][6]:
+                score += 1
+                self.score_label.config(text)
+
+
+
+
+
+
+
+
+    
 
 
 
