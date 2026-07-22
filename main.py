@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 from tkinter import *
 
 
@@ -97,7 +98,44 @@ class Quiz:
             #check answer
             if choice == questions_and_answers[qnum][6]:
                 score += 1
-                self.score_label.config(text)
+                self.score_label.config(text=f"Score: {score}")
+            else:
+                self.score_label.config(text=f"Wrong correct:{questions_and_answers[qnum][5]}")
+
+            if len(asked) >= 5:
+                self.quiz_frame.destroy()
+                self.display_summary()
+            else:
+                self.questions_setup()
+
+
+        def display_summary(self):
+            summary_frame = Frame(root,bg="Oldlace", padx=100, pady=100)
+            summary_frame.grid()
+
+            final_msg = f"Quiz Completed!\nYour final score is{score}out of 5"
+            summary_label =Label(summary_frame, text=final_msg, font=("Tw Cen MT", 18, "bold"), bg="OldLace")
+            summary_label.grid(row=0, pady=20)
+
+            exit_button = Button(summary_frame, text="Exit", command=root.destroy, bg="red", fg="white")
+            exit_button.grid(row=1, pady=10)
+
+    if __name__ == "__main__":
+        root = Tk()
+        root.title("Quiz")
+
+        img = Image.open("photo.png")
+        img = img.resize((200,150))
+        photo = ImageTK.PhotoImage(img)
+
+        quiz_instance = Quizstarter(root)
+        root.mainloop()
+
+
+
+
+
+
 
 
 
