@@ -1,15 +1,16 @@
-import tkinter as tk
-
 
 from tkinter import *
-
-
 from PIL import Image, ImageTk
-
-
 import random
 
-#QUestion dictionary
+names = []
+asked = []
+score = 0
+
+
+
+
+#Question dictionary
 questions_and_answers ={
     1: ["What piece of equipment can be used  to train the pectoral muscles?",'Treadmill','Bench press','Rowing Machine','Kettlebell', 3],
 2: ["What are the chest Muscles called",'Abdominal','Biceps','Pectorals','Deltoids', 3],
@@ -23,7 +24,22 @@ questions_and_answers ={
 10: ["How much grams of protein should you eat post-workout",'0-15','20-40','0-5','6-14', 2],
 }
 
-class Quizstart:
+
+def randomiser():
+    global qnum
+    qnum = random.randint(1,10)
+    if qnum not in asked:
+        asked.append(qnum)
+    else:
+        randomiser()
+
+
+
+
+
+
+
+class Quizstarter:
     def __innit__(self, parent):
         background_color= "#F4F4EF"
         self.quiz_frame = Frame(parent, bg=background_color,padx=67, pady=67)
@@ -58,21 +74,21 @@ class Quiz:
 
         randomiser()
 
-        self.question_label = Label(self.quiz_frame, text=questions_and_answers[qnum][0], font=("Tw Cen MT", "18", "bold"), bg=background_color)
+        self.question_label = Label(self.quiz_frame, text=questions_and_answers[qnum][0],  bg=background_color)
         self.question_label.grid(row=0, padx=10, pady=10)
 
         self.var1 = IntVar()
 
-        self.rb1 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][1], font=("Helvetica","12"), bg=background_color, value=1, variable=self.var1)
+        self.rb1 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][1],  bg=background_color, value=1, variable=self.var1)
         self.rb1.grid(row=1, sticky=W)
 
-        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1)
+        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][2],  bg=background_color, value=1, variable=self.var1)
         self.rb2.grid(row=2, sticky=W)
 
-        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][3], font=("Helvetica", "12"),  bg=background_color, value=1, variable=self.var1)
+        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][3],   bg=background_color, value=1, variable=self.var1)
         self.rb2.grid(row=3, sticky=W)
 
-        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1)
+        self.rb2 = Radiobutton(self.quiz_frame, text=questions_and_answers[qnum][4] , bg=background_color, value=1, variable=self.var1)
         self.rb2.grid(row=4, sticky=W)
 
 
@@ -124,7 +140,7 @@ class Quiz:
         root = Tk()
         root.title("Quiz")
 
-        img = Image.open("photo.png")
+        img = Image.open("Homepage.png")
         img = img.resize((200,150))
         photo = ImageTK.PhotoImage(img)
 
@@ -133,86 +149,3 @@ class Quiz:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-root=Tk()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-root.mainloop()
