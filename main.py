@@ -77,19 +77,20 @@ class Quizstart:
         try:
             self.photo = Image.open("photo.png")
             self.photo = self.photo.resize((200, 150))
-            self.photo = ImageTk.Photoimage(self.photo)
+            self.photo = ImageTk.PhotoImage(self.photo)
             self.image_label = Label(
               self.quiz_frame,
               image=self.photo,
               bg=background_color
             )
 
-            self.image_label.grid(row=4, = padx=10, pady=10)
+            self.image_label.grid(row=4,  padx=10, pady=10)
+        except:
+            print("image not found")
 
 
 
-
-def name_collection(self):
+    def name_collection(self):
 
         name = self.entry_box.get()
         if name:
@@ -160,14 +161,14 @@ class Quiz:
         self.confirm_button = Button(self.quiz_frame, text="confirm", bg="pink", command=self.test_progress)
         self.confirm_button.grid(row=8,pady=10)
 
-     def questions_setup(self):
+    def questions_setup(self):
             randomiser()
             self.var1.set(0)
             self.question_label.config(text=questions_and_answers[qnum][0])
             self.rb1.config(text=questions_and_answers[qnum][1])
-            self.rb1.config(text=questions_and_answers[qnum][2])
-            self.rb1.config(text=questions_and_answers[qnum][3])
-            self.rb1.config(text=questions_and_answers[qnum][4])
+            self.rb2.config(text=questions_and_answers[qnum][2])
+            self.rb3.config(text=questions_and_answers[qnum][3])
+            self.rb4.config(text=questions_and_answers[qnum][4])
 
     def test_progress(self):
             global score
@@ -177,11 +178,12 @@ class Quiz:
                 return
 
             #check answer
-            if choice == questions_and_answers[qnum][6]:
+            if choice == questions_and_answers[qnum][5]:
                 score += 1
                 self.score_label.config(text=f"Score: {score}")
             else:
-                self.score_label.config(text=f"Wrong correct:{questions_and_answers[qnum][5]}")
+                correct = questions_and_answers[qnum][5]
+                self.score_label.config(text=f"Wrong correct:{questions_and_answers[qnum][correct]}")
 
             if len(asked) >= 5:
                 self.quiz_frame.destroy()
@@ -194,7 +196,7 @@ class Quiz:
             summary_frame = Frame(root,bg="Oldlace", padx=100, pady=100)
             summary_frame.grid()
 
-            final_msg = f"Quiz Completed!\nYour final score is{score}out of 5"
+            final_msg = f"Quiz Completed!\nYour final score is {score} out of 5"
             summary_label =Label(summary_frame, text=final_msg, font=("Tw Cen MT", 18, "bold"), bg="OldLace")
             summary_label.grid(row=0, pady=20)
 
@@ -205,11 +207,11 @@ class Quiz:
         root = Tk()
         root.title("Quiz")
 
-        img = Image.open("Homepage.png")
+        img = Image.open("2.png")
         img = img.resize((200,150))
-        photo = ImageTK.PhotoImage(img)
+        photo = ImageTk.PhotoImage(img)
 
-        quiz_instance = Quizstarter(root)
+        quiz_instance = Quizstart(root)
         root.mainloop()
 
 
