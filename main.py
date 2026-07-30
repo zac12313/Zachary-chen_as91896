@@ -1,4 +1,3 @@
-
 from tkinter import *
 
 
@@ -13,7 +12,7 @@ import random
 
 
 #Question dictionary
-questions_and_answers ={
+questions_and_answers = {
     1: ["What piece of equipment can be used  to train the pectoral muscles?",'Treadmill','Bench press','Rowing Machine','Kettlebell', 3],
 
     2: ["What are the chest Muscles called",'Abdominal','Biceps','Pectorals','Deltoids', 3],
@@ -51,56 +50,55 @@ def randomiser():
             break
 
 
-
-
-
-
-
-
-
 class Quizstart:
     def __init__(self, parent):
+        self.parent = parent
         background_color = "#F4F4EF"
+
         self.quiz_frame = Frame(parent, bg=background_color, padx=67, pady=67)
         self.quiz_frame.grid()
 
         self.heading_label = Label(self.quiz_frame, text="Gym quiz", bg=background_color)
-
         self.heading_label.grid(row=0, padx=20, pady=10)
 
         self.entry_box = Entry(self.quiz_frame)
         self.entry_box.grid(row=2, padx=20, pady=20)
 
-        self.continue_button = Button(self.quiz_frame, text="continue", bg="grey", command=self.name_collection)
+        self.continue_button = Button(
+            self.quiz_frame,
+            text="Continue",
+            bg="grey",
+            command=self.name_collection
+        )
         self.continue_button.grid(row=6, padx=20, pady=20)
 
         try:
-            self.photo = Image.open("photo.png")
+            self.photo = Image.open("2.png")
             self.photo = self.photo.resize((200, 150))
             self.photo = ImageTk.PhotoImage(self.photo)
+
             self.image_label = Label(
-              self.quiz_frame,
-              image=self.photo,
-              bg=background_color
+                self.quiz_frame,
+                image=self.photo,
+                bg=background_color
             )
+            self.image_label.grid(row=4, padx=10, pady=10)
 
-            self.image_label.grid(row=4,  padx=10, pady=10)
         except:
-            print("image not found")
-
-
+            print("Image not found")
 
     def name_collection(self):
-
         name = self.entry_box.get()
+
         if name:
             names.append(name)
             self.quiz_frame.destroy()
-            Quiz(root)
+            Quiz(self.parent)
+
 
 
 class Quiz:
-    def __init__(self, parent):
+    def __init__(self,parent):
 
         global score
         background_color = "oldLace"
@@ -111,7 +109,7 @@ class Quiz:
         randomiser()
 
         self.question_label = Label(self.quiz_frame, text=questions_and_answers[qnum][0],  bg=background_color)
-        self.question_label.grid(row=0, padx=10, pady=10)
+        self.question_label.grid(row=0,padx=10,pady=10)
 
         self.var1 = IntVar()
 
@@ -137,8 +135,8 @@ class Quiz:
             self.quiz_frame,
             text=questions_and_answers[qnum][3],
             value=3,
-        variable = self.var1,
-        bg = background_color
+            variable = self.var1,
+            bg = background_color
         )
         self.rb3.grid(row=3, sticky=W)
 
@@ -146,8 +144,8 @@ class Quiz:
             self.quiz_frame,
             text=questions_and_answers[qnum][4],
             value=4,
-        variable = self.var1,
-        bg = background_color
+            variable = self.var1,
+            bg = background_color
         )
         self.rb4.grid(row=4, sticky=W)
 
@@ -191,28 +189,25 @@ class Quiz:
             else:
                 self.questions_setup()
 
-
     def display_summary(self):
-            summary_frame = Frame(root,bg="Oldlace", padx=100, pady=100)
-            summary_frame.grid()
+        summary_frame = Frame(root, bg="OldLace", padx=100, pady=100)
+        summary_frame.grid()
 
-            final_msg = f"Quiz Completed!\nYour final score is {score} out of 5"
-            summary_label =Label(summary_frame, text=final_msg, font=("Tw Cen MT", 18, "bold"), bg="OldLace")
-            summary_label.grid(row=0, pady=20)
+        final_msg = f"Quiz Completed!\nYour final score is {score} out of 5"
+        summary_label = Label(summary_frame, text=final_msg,
+                              font=("Tw Cen MT", 18, "bold"), bg="OldLace")
+        summary_label.grid(row=0, pady=20)
 
-            exit_button = Button(summary_frame, text="Exit", command=root.destroy, bg="red", fg="white")
-            exit_button.grid(row=1, pady=10)
+        exit_button = Button(summary_frame, text="Exit",
+                             command=root.destroy, bg="red", fg="white")
+        exit_button.grid(row=1, pady=10)
 
     if __name__ == "__main__":
         root = Tk()
         root.title("Quiz")
 
-        img = Image.open("2.png")
-        img = img.resize((200,150))
-        photo = ImageTk.PhotoImage(img)
+        Quizstart(root)
 
-        quiz_instance = Quizstart(root)
         root.mainloop()
-
 
 
