@@ -11,7 +11,7 @@ import random
 
 
 
-#Question dictionary
+#Question dictionary containing all the questions and the answers
 questions_and_answers = {
     1: ["What piece of equipment can be used  to train the pectoral muscles?",'Treadmill','Bench press','Rowing Machine','Kettlebell', 3],
 
@@ -33,37 +33,39 @@ questions_and_answers = {
 
     10: ["How much grams of protein should you eat post-workout",'0-15','20-40','0-5','6-14', 2],
 }
-
+# stores the users names, questions already used
+#global variables
 names = []
 asked = []
 score = 0
 qnum = 0
 
+#randomizes the questions
 def randomiser():
     global qnum
 
     while True:
-        qnum = random.randint(1, 10)
+        qnum = random.randint(1, 10) #picks a random question
 
-        if qnum not in asked:
+        if qnum not in asked:#checks if the question has been used b4
             asked.append(qnum)
             break
 
-
+#the start page where it asks for username
 class Quizstart:
     def __init__(self, parent):
         self.parent = parent
         background_color = "#F4F4EF"
-
+#creates frame that holds all the buttons/widgets
         self.quiz_frame = Frame(parent, bg=background_color, padx=67, pady=67)
         self.quiz_frame.grid()
-
+#title if quiz
         self.heading_label = Label(self.quiz_frame, text="Gym quiz", bg=background_color)
         self.heading_label.grid(row=0, padx=20, pady=10)
-
+#text box for users to enter their names
         self.entry_box = Entry(self.quiz_frame)
         self.entry_box.grid(row=2, padx=20, pady=20)
-
+#continue button
         self.continue_button = Button(
             self.quiz_frame,
             text="Continue",
@@ -71,7 +73,7 @@ class Quizstart:
             command=self.name_collection
         )
         self.continue_button.grid(row=6, padx=20, pady=20)
-
+#inserts image and resizes
         try:
             self.photo = Image.open("2.png")
             self.photo = self.photo.resize((200, 150))
@@ -83,10 +85,10 @@ class Quizstart:
                 bg=background_color
             )
             self.image_label.grid(row=4, padx=10, pady=10)
-
+#alternative option if image doesnt load/isnt found
         except:
             print("Image not found")
-
+#function for collection users name
     def name_collection(self):
         name = self.entry_box.get()
 
@@ -95,8 +97,7 @@ class Quizstart:
             self.quiz_frame.destroy()
             Quiz(self.parent)
 
-
-
+#creates the question page
 class Quiz:
     def __init__(self,parent):
 
@@ -106,13 +107,13 @@ class Quiz:
             parent, bg=background_color, padx=100, pady=100)
         self.quiz_frame.grid()
 
-        randomiser()
+        randomiser() # selects first random question
 
         self.question_label = Label(self.quiz_frame, text=questions_and_answers[qnum][0],  bg=background_color)
         self.question_label.grid(row=0,padx=10,pady=10)
-
+#variable for selected answer
         self.var1 = IntVar()
-
+#four answer buttons
         self.rb1 = Radiobutton(
             self.quiz_frame,
             text=questions_and_answers[qnum][1],
@@ -158,7 +159,7 @@ class Quiz:
         self.score_label.grid(row=6)
         self.confirm_button = Button(self.quiz_frame, text="confirm", bg="pink", command=self.test_progress)
         self.confirm_button.grid(row=8,pady=10)
-
+# updates the quiz with new questions
     def questions_setup(self):
             randomiser()
             self.var1.set(0)
@@ -167,7 +168,7 @@ class Quiz:
             self.rb2.config(text=questions_and_answers[qnum][2])
             self.rb3.config(text=questions_and_answers[qnum][3])
             self.rb4.config(text=questions_and_answers[qnum][4])
-
+#this function makes sure teh user selects a option before progressing further and prevents them from skipping.
     def test_progress(self):
             global score
             choice = self.var1.get()
@@ -182,32 +183,34 @@ class Quiz:
             else:
                 correct = questions_and_answers[qnum][5]
                 self.score_label.config(text=f"Wrong correct:{questions_and_answers[qnum][correct]}")
-
+#stops from displaying more then 5 questions and will destroy the frame
             if len(asked) >= 5:
                 self.quiz_frame.destroy()
                 self.display_summary()
             else:
                 self.questions_setup()
-
+#ending page/exit screen
     def display_summary(self):
         summary_frame = Frame(root, bg="OldLace", padx=100, pady=100)
         summary_frame.grid()
-
+#congratulatory message for finishing and displays score out of 5
         final_msg = f"Quiz Completed!\nYour final score is {score} out of 5"
         summary_label = Label(summary_frame, text=final_msg,
                               font=("Tw Cen MT", 18, "bold"), bg="OldLace")
         summary_label.grid(row=0, pady=20)
-
+#exit button
         exit_button = Button(summary_frame, text="Exit",
                              command=root.destroy, bg="red", fg="white")
         exit_button.grid(row=1, pady=10)
 
-    if __name__ == "__main__":
-        root = Tk()
-        root.title("Quiz")
 
-        Quizstart(root)
+#runs the program
+if __name__ == "__main__":
+    root = Tk()
+    root.title("Quiz")
 
-        root.mainloop()
+    Quizstart(root)
+
+    root.mainloop()
 
 
